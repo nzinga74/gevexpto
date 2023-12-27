@@ -6,6 +6,7 @@ package views;
 
 import models.User;
 import repositories.UserRepository;
+import utils.providers.JEncript;
 import views.D;
 import views.Home;
 
@@ -176,8 +177,9 @@ public class Login extends javax.swing.JFrame {
                 errorLabel.setText("Email/Password inválido");
                 return;
             }
-            int isPasswordValid = user.getPassword().compareTo(password);
-            if(isPasswordValid != 0) {
+            //boolean isPasswordValid = user.getPassword().compareTo(password);
+            boolean isPasswordValid = JEncript.compareHash(password, user.getPassword());
+            if(!isPasswordValid) {
                  System.out.println("user: "+ user.getName());
                  errorLabel.setText("Email/Password inválido");
                 return;
