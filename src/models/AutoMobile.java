@@ -4,6 +4,8 @@
  */
 package models;
 
+import java.util.Date;
+
 /**
  *
  * @author nzinga
@@ -11,10 +13,24 @@ package models;
 public class AutoMobile extends Vehicle {
     protected Motor motor;
 
-
-    public AutoMobile(Motor motor) {
+    public AutoMobile(Motor motor, int id, String type, String brand, String model, String carRegistration, int year, int capacity, Date createdAt, Date updatedAt, Tire tire) {
+        super(id, type, brand, model, carRegistration, year, capacity, createdAt, updatedAt, tire);
         this.motor = motor;
     }
+
+    public AutoMobile(Motor motor, int id, String type, String brand, String model, String carRegistration, int year, int capacity, Date createdAt, Date updatedAt, Driver driver, Tire tire) {
+        super(id, type, brand, model, carRegistration, year, capacity, createdAt, updatedAt, driver, tire);
+        this.motor = motor;
+    }
+    
+    public void performMaintenance (Vehicle vehicle, Mechanic mechanic,int options ) {
+    
+    }
+    public boolean operateEngine() {
+        return this.motor.turnOnMotor();
+    }
+
+    
     
     public Motor getMotor() {
         return motor;

@@ -8,6 +8,6 @@ package models;
  *
  * @author nzinga
  */
-public class Employeer {
+public class Mechanic {
     
 }

@@ -8,6 +8,6 @@ package models;
  *
  * @author nzinga
  */
-public class Bike extends NoAutomobile{
+public class Employee {
     
 }

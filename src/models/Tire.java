@@ -4,10 +4,14 @@
  */
 package models;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author nzinga
  */
 public class Tire {
-    
+    public void performMaintenance () {
+        JOptionPane.showMessageDialog(null,"pneus foram tricados... ");
+    }
 }

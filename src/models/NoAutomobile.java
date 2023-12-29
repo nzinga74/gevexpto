@@ -9,5 +9,7 @@ package models;
  * @author nzinga
  */
 public class NoAutomobile extends Vehicle {
+    public void performMaintenance ( Mechanic mechanic,int options ) {
     
+    }
 }

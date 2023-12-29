@@ -14,6 +14,6 @@ public class User {
     protected String password;
     protected int accessLevel;
     protected int state;
-    protected Employeer employeer;
+    protected Employee employee;
     protected boolean isAdmin;
 }

@@ -15,7 +15,7 @@ public class Home extends javax.swing.JFrame {
     /**
      * Creates new form Home
      */
-     Employee employeePage = new Employee();
+     EmployeePage employeePage = new EmployeePage();
      Vehicle vehicle = new Vehicle();
     CardLayout cardLayout;
 //    D test = new D();
