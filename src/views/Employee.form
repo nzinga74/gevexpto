@@ -41,7 +41,7 @@
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jTabbedPane1" min="-2" pref="469" max="-2" attributes="0"/>
-              <EmptySpace pref="44" max="32767" attributes="0"/>
+              <EmptySpace pref="32" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -438,11 +438,11 @@
                       <Table columnCount="7" rowCount="4">
                         <Column editable="true" title="Nome" type="java.lang.Object"/>
                         <Column editable="true" title="Sobrenome" type="java.lang.Object"/>
-                        <Column editable="true" title="Cargo" type="java.lang.Object"/>
-                        <Column editable="true" title="Email" type="java.lang.Object"/>
+                        <Column editable="true" title="BI" type="java.lang.Object"/>
+                        <Column editable="true" title="Nacinalidade" type="java.lang.Object"/>
                         <Column editable="true" title="Senha" type="java.lang.Object"/>
-                        <Column editable="true" title="Associar veiculo" type="java.lang.Object"/>
-                        <Column editable="true" title="Carta de condu&#xe7;&#xe3;o" type="java.lang.Object"/>
+                        <Column editable="true" title="Cargo" type="java.lang.Object"/>
+                        <Column editable="true" title="Data de nascimento" type="java.lang.Object"/>
                       </Table>
                     </Property>
                   </Properties>

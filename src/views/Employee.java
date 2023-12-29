@@ -223,7 +223,7 @@ public class Employee extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nome", "Sobrenome", "Cargo", "Email", "Senha", "Associar veiculo", "Carta de condução"
+                "Nome", "Sobrenome", "BI", "Nacinalidade", "Senha", "Cargo", "Data de nascimento"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -262,7 +262,7 @@ public class Employee extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         jTabbedPane1.getAccessibleContext().setAccessibleName("Listar");
