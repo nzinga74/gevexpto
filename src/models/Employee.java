@@ -20,6 +20,9 @@ public class Employee {
     protected Date birthDate;
     protected String office;
 
+    public Employee() {
+    }
+    
     public Employee( String bi, String firstName, String lastName, String nacionality, char sex, Date birthDate, String office) {
         this.bi = bi;
         this.firstName = firstName;

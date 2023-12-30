@@ -13,7 +13,8 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import models.Employee;
 import repositories.EmployeeRepository;
-import utils.tables.EmployeeTableSerialize;
+import utils.tables.TableSerialize;
+import utils.tables.EmployeeTableDataTransform;
 
 /**
  *
@@ -27,28 +28,7 @@ public class EmployeePage extends javax.swing.JPanel {
     public EmployeePage() {
 
         initComponents();
-        try {
-            ArrayList<Employee> employeeList = EmployeeRepository.getAll();
-            int employeeLength = employeeList.size() ;
-            String[][] data = new String[employeeLength][6];
-
-            for (int i = 0; i < employeeLength; i++) {
-                data[i][0] = employeeList.get(i).getFirstName();
-                data[i][1] = employeeList.get(i).getLastName();
-                data[i][2] = employeeList.get(i).getBi();
-                data[i][3] = employeeList.get(i).getNacionality();
-                data[i][4] = employeeList.get(i).getOffice();
-                data[i][5] = employeeList.get(i).getBirthDate().toString();
-            };
-            EmployeeTableSerialize employeeTableModel = new  EmployeeTableSerialize(data);
-            employeeTb.setModel(employeeTableModel);
-            
-            System.out.println("here");
-        } catch (Exception ex) {
-            System.out.println("Erro");
-            //JOptionPane.showMessageDialog(null, "Erro ao Listar");
-        }
-
+        loadEmployeeData();
     }
 
     /**
@@ -301,6 +281,19 @@ public class EmployeePage extends javax.swing.JPanel {
         jTabbedPane1.getAccessibleContext().setAccessibleName("Listar");
     }// </editor-fold>//GEN-END:initComponents
 
+    private void loadEmployeeData() {
+        try {
+            ArrayList<Employee> employeeList = EmployeeRepository.getAll();
+            String[][] data = EmployeeTableDataTransform.dataTransform(employeeList);
+            String[] columnNames = EmployeeTableDataTransform.dataColumn();
+            TableSerialize employeeTableModel = new TableSerialize(data, columnNames);
+            employeeTb.setModel(employeeTableModel);
+
+        } catch (Exception ex) {
+            System.out.println("Erro");
+            //JOptionPane.showMessageDialog(null, "Erro ao Listar");
+        }
+    }
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -329,32 +322,13 @@ public class EmployeePage extends javax.swing.JPanel {
 
         try {
             EmployeeRepository.add(employee);
+            loadEmployeeData();
             JOptionPane.showMessageDialog(null, "Cadastrar com sucesso");
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Erro ao Cadastrar");
         }
 
-        try {
-            ArrayList<Employee> employeeList = EmployeeRepository.getAll();
-            //GET ALL USER 
-//            int employeeLength = employeeList.size() ;
-//            String[][] data = new String[employeeLength][6];
-//
-//            for (int i = 0; i < employeeLength; i++) {
-//                data[i][0] = employeeList.get(i).getFirstName();
-//                data[i][1] = employeeList.get(i).getLastName();
-//                data[i][2] = employeeList.get(i).getBi();
-//                data[i][3] = employeeList.get(i).getNacionality();
-//                data[i][4] = employeeList.get(i).getOffice();
-//                data[i][5] = employeeList.get(i).getBirthDate().toString();
-//            }
-//
-//            EmployeeTableSerialize employeeTableModel = new  EmployeeTableSerialize(data);
-//            employeeTb.setModel(employeeTableModel);
-
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao Listar");
-        }
+        
 
     }//GEN-LAST:event_submitBtnActionPerformed
 

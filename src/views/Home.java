@@ -246,7 +246,7 @@ public class Home extends javax.swing.JFrame {
     private void userMenuBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userMenuBtnMouseClicked
         // TODO add your handling code here:
         pn1Cards.remove(0);
-        pn1Cards.add(new UserName(),0);
+        pn1Cards.add(new UserPage(),0);
     }//GEN-LAST:event_userMenuBtnMouseClicked
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked

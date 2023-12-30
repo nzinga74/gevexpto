@@ -10,12 +10,13 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author nzinga
  */
-public class EmployeeTableSerialize extends AbstractTableModel {
-    private  String[] columnNames = {"Nome","Sobrenome","Bi","Nacionalidade","Cargo", "Data de Nascimeto"}; 
+public class TableSerialize extends AbstractTableModel {
+    private  String[] columnNames; 
     private String[][] data;
 
-    public EmployeeTableSerialize(String[][] data) {
+    public TableSerialize(String[][] data, String [] columnNames) {
         this.data = data;
+        this.columnNames = columnNames;
     }
     
 

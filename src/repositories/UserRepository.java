@@ -8,6 +8,8 @@ import config.database.MysqlConnection;
 import models.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import models.Employee;
 /**
  *
  * @author nzinga
@@ -38,6 +40,33 @@ public class UserRepository {
         }
     }
     
+    public static ArrayList<User> getAll() throws Exception {
+        String sql = "select * from usuario";
+        ArrayList<User> userList = new ArrayList<User>();
+        PreparedStatement ps = null;
+        try {
+            ps = MysqlConnection.getConnection().prepareStatement(sql);
+            ResultSet userResultSet = ps.executeQuery();
+            while(userResultSet.next()) {
+                int id = userResultSet.getInt("id");
+                String email = userResultSet.getString("Email");
+                int state = userResultSet.getInt("Estado");
+                int accessLevel = userResultSet.getInt("Nivel_acesso");
+                int id_funcionario = userResultSet.getInt("id_funcionario");
+                Employee employee = new Employee();
+                employee.setId(id_funcionario);
+                User user = new User(id,email,accessLevel,state,employee);
+                userList.add(user);
+            }
+            ps.close();
+            userResultSet.close();
+            
+            return userList;
+        }
+        catch(Exception e) {
+            throw new Exception("Erro ao buscar os usuários");
+        } 
+    }
 //    public User findById(int id) {
 //        String sql = "SELECT * from users WHERE id=?";
 //        PreparedStatement ps = null;

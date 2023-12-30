@@ -33,6 +33,14 @@ public class User {
         this.state = state;
         this.employee = employee;
     }
+
+    public User(int id, String email, int accessLevel, int state, Employee employee) {
+        this.id = id;
+        this.email = email;
+        this.accessLevel = accessLevel;
+        this.state = state;
+        this.employee = employee;
+    }
     
     
 

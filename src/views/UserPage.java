@@ -17,19 +17,22 @@ import models.User;
 import repositories.EmployeeRepository;
 import repositories.UserRepository;
 import utils.providers.JEncript;
+import utils.tables.TableSerialize;
+import utils.tables.UserTableDataTransform;
 
 /**
  *
  * @author Rita
  */
-public class UserName extends javax.swing.JPanel {
+public class UserPage extends javax.swing.JPanel {
 
     /**
      * Creates new form User
      */
     ArrayList<Employee> employeeList;
+    ArrayList<User> usersList;
 
-    public UserName() {
+    public UserPage() {
         initComponents();
         try {
             employeeList = EmployeeRepository.getAll();
@@ -43,6 +46,10 @@ public class UserName extends javax.swing.JPanel {
             System.out.println("Erro ao carregar Funcionário");
             employeeList = new ArrayList<Employee>();
         }
+        
+        //GET ALL USERS
+        loadUserData();
+        
     }
 
     /**
@@ -68,7 +75,7 @@ public class UserName extends javax.swing.JPanel {
         accessLevelCb = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        userTb = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -179,8 +186,8 @@ public class UserName extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        userTb.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        userTb.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -191,7 +198,7 @@ public class UserName extends javax.swing.JPanel {
                 "Email", "Senha", "Nivel de acesso", "Estado", "Funcionário"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(userTb);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -231,27 +238,40 @@ public class UserName extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void loadUserData() {
+        try {
+            usersList = UserRepository.getAll();
+            String [][] data = UserTableDataTransform.dataTransform(usersList);
+            System.out.println(data[0][0]);
+            String [] columnNames = UserTableDataTransform.dataColumn();
+            TableSerialize userTableModel = new TableSerialize(data, columnNames) ;
+            userTb.setModel(userTableModel);
+        } catch (Exception e) {
+
+        }
+    }
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
         // TODO add your handling code here:
         if (employeeList != null) {
             String email = emailInput.getText();
             String password;
             try {
-                password = JEncript.encript( passwordInput.getText());
+                password = JEncript.encript(passwordInput.getText());
             } catch (NoSuchAlgorithmException ex) {
-               return;
+                return;
             }
             int employeeId = employeeCd.getSelectedIndex();
             Employee employee = employeeList.get(employeeId);
             int accessLevel = accessLevelCb.getSelectedIndex() + 1;
             User user = new User(email, password, accessLevel, 0, employee);
-            
+
             try {
                 UserRepository.add(user);
                 JOptionPane.showMessageDialog(null, "Cadastrar com sucesso");
             } catch (Exception ex) {
-               JOptionPane.showMessageDialog(null, "Erro ao Cadastrar");
+                JOptionPane.showMessageDialog(null, "Erro ao Cadastrar");
             }
+            loadUserData();
         }
     }//GEN-LAST:event_submitBtnActionPerformed
 
@@ -269,8 +289,8 @@ public class UserName extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPasswordField passwordInput;
     private javax.swing.JButton submitBtn;
+    private javax.swing.JTable userTb;
     // End of variables declaration//GEN-END:variables
 }
