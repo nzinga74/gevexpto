@@ -5,17 +5,44 @@
  */
 package views;
 
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import models.Employee;
+import models.User;
+import repositories.EmployeeRepository;
+import repositories.UserRepository;
+import utils.providers.JEncript;
+
 /**
  *
  * @author Rita
  */
-public class User extends javax.swing.JPanel {
+public class UserName extends javax.swing.JPanel {
 
     /**
      * Creates new form User
      */
-    public User() {
+    ArrayList<Employee> employeeList;
+
+    public UserName() {
         initComponents();
+        try {
+            employeeList = EmployeeRepository.getAll();
+            int employeeLength = employeeList.size();
+            String employeeData[] = new String[employeeLength];
+            for (int i = 0; i < employeeLength; i++) {
+                employeeData[i] = employeeList.get(i).getFirstName() + " " + employeeList.get(i).getLastName();
+            }
+            employeeCd.setModel(new DefaultComboBoxModel(employeeData));
+        } catch (Exception e) {
+            System.out.println("Erro ao carregar Funcionário");
+            employeeList = new ArrayList<Employee>();
+        }
     }
 
     /**
@@ -32,13 +59,13 @@ public class User extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField3 = new javax.swing.JTextField();
+        employeeCd = new javax.swing.JComboBox<>();
+        emailInput = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        passwordInput = new javax.swing.JPasswordField();
+        submitBtn = new javax.swing.JButton();
+        accessLevelCb = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -62,16 +89,16 @@ public class User extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel4.setText("Nivel de acesso");
 
-        jComboBox1.setBackground(new java.awt.Color(227, 236, 245));
-        jComboBox1.setForeground(new java.awt.Color(140, 164, 188));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escolha funcionário", " " }));
-        jComboBox1.setPreferredSize(new java.awt.Dimension(64, 18));
+        employeeCd.setBackground(new java.awt.Color(227, 236, 245));
+        employeeCd.setForeground(new java.awt.Color(140, 164, 188));
+        employeeCd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escolha funcionário", " " }));
+        employeeCd.setPreferredSize(new java.awt.Dimension(64, 18));
 
-        jTextField3.setBackground(new java.awt.Color(227, 236, 245));
-        jTextField3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField3.setForeground(new java.awt.Color(140, 164, 188));
-        jTextField3.setText(" Digite o email");
-        jTextField3.setBorder(null);
+        emailInput.setBackground(new java.awt.Color(227, 236, 245));
+        emailInput.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        emailInput.setForeground(new java.awt.Color(140, 164, 188));
+        emailInput.setText(" Digite o email");
+        emailInput.setBorder(null);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel6.setText("Email");
@@ -79,19 +106,24 @@ public class User extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel7.setText("Senha");
 
-        jPasswordField1.setBackground(new java.awt.Color(227, 236, 245));
-        jPasswordField1.setForeground(new java.awt.Color(140, 164, 188));
-        jPasswordField1.setText("jPasswordField1");
+        passwordInput.setBackground(new java.awt.Color(227, 236, 245));
+        passwordInput.setForeground(new java.awt.Color(140, 164, 188));
+        passwordInput.setText("jPasswordField1");
 
-        jButton1.setBackground(new java.awt.Color(55, 66, 88));
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Cadastrar");
+        submitBtn.setBackground(new java.awt.Color(55, 66, 88));
+        submitBtn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        submitBtn.setForeground(new java.awt.Color(255, 255, 255));
+        submitBtn.setText("Cadastrar");
+        submitBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitBtnActionPerformed(evt);
+            }
+        });
 
-        jComboBox2.setBackground(new java.awt.Color(227, 236, 245));
-        jComboBox2.setForeground(new java.awt.Color(140, 164, 188));
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escolha o nivel", "Admin", "Normal" }));
-        jComboBox2.setPreferredSize(new java.awt.Dimension(64, 18));
+        accessLevelCb.setBackground(new java.awt.Color(227, 236, 245));
+        accessLevelCb.setForeground(new java.awt.Color(140, 164, 188));
+        accessLevelCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escolha o nivel", "Admin", "Normal" }));
+        accessLevelCb.setPreferredSize(new java.awt.Dimension(64, 18));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -100,27 +132,23 @@ public class User extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(employeeCd, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel3)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel7)
-                                    .addGap(302, 302, 302)
-                                    .addComponent(jLabel4))
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel3)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(34, 34, 34)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(passwordInput, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(accessLevelCb, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(emailInput, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel7)
+                            .addGap(302, 302, 302)
+                            .addComponent(jLabel4))))
+                .addContainerGap(25, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(submitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37))
         );
         jPanel1Layout.setVerticalGroup(
@@ -129,21 +157,21 @@ public class User extends javax.swing.JPanel {
                 .addGap(28, 28, 28)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(emailInput, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jLabel4))
                 .addGap(7, 7, 7)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(passwordInput, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(accessLevelCb, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(employeeCd, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(3, 3, 3)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(submitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
 
@@ -203,11 +231,35 @@ public class User extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
+        // TODO add your handling code here:
+        if (employeeList != null) {
+            String email = emailInput.getText();
+            String password;
+            try {
+                password = JEncript.encript( passwordInput.getText());
+            } catch (NoSuchAlgorithmException ex) {
+               return;
+            }
+            int employeeId = employeeCd.getSelectedIndex();
+            Employee employee = employeeList.get(employeeId);
+            int accessLevel = accessLevelCb.getSelectedIndex() + 1;
+            User user = new User(email, password, accessLevel, 0, employee);
+            
+            try {
+                UserRepository.add(user);
+                JOptionPane.showMessageDialog(null, "Cadastrar com sucesso");
+            } catch (Exception ex) {
+               JOptionPane.showMessageDialog(null, "Erro ao Cadastrar");
+            }
+        }
+    }//GEN-LAST:event_submitBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> accessLevelCb;
+    private javax.swing.JTextField emailInput;
+    private javax.swing.JComboBox<String> employeeCd;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -215,10 +267,10 @@ public class User extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JPasswordField passwordInput;
+    private javax.swing.JButton submitBtn;
     // End of variables declaration//GEN-END:variables
 }
