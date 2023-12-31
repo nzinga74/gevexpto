@@ -100,6 +100,7 @@ public class UserPage extends javax.swing.JPanel {
         employeeCd.setBackground(new java.awt.Color(227, 236, 245));
         employeeCd.setForeground(new java.awt.Color(140, 164, 188));
         employeeCd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escolha funcionário", " " }));
+        employeeCd.setBorder(null);
         employeeCd.setPreferredSize(new java.awt.Dimension(64, 18));
 
         emailInput.setBackground(new java.awt.Color(227, 236, 245));
@@ -117,6 +118,7 @@ public class UserPage extends javax.swing.JPanel {
         passwordInput.setBackground(new java.awt.Color(227, 236, 245));
         passwordInput.setForeground(new java.awt.Color(140, 164, 188));
         passwordInput.setText("jPasswordField1");
+        passwordInput.setBorder(null);
 
         submitBtn.setBackground(new java.awt.Color(55, 66, 88));
         submitBtn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -131,6 +133,7 @@ public class UserPage extends javax.swing.JPanel {
         accessLevelCb.setBackground(new java.awt.Color(227, 236, 245));
         accessLevelCb.setForeground(new java.awt.Color(140, 164, 188));
         accessLevelCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escolha o nivel", "Admin", "Normal" }));
+        accessLevelCb.setBorder(null);
         accessLevelCb.setPreferredSize(new java.awt.Dimension(64, 18));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
