@@ -46,7 +46,7 @@ public class Home extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        routeMenuBtn = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         pn1Cards = new javax.swing.JPanel();
 
@@ -136,13 +136,13 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setForeground(new java.awt.Color(221, 226, 255));
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icon2.png"))); // NOI18N
-        jLabel8.setText("Rotas");
-        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+        routeMenuBtn.setForeground(new java.awt.Color(221, 226, 255));
+        routeMenuBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        routeMenuBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icon2.png"))); // NOI18N
+        routeMenuBtn.setText("Rotas");
+        routeMenuBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel8MouseClicked(evt);
+                routeMenuBtnMouseClicked(evt);
             }
         });
 
@@ -160,7 +160,7 @@ public class Home extends javax.swing.JFrame {
             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(routeMenuBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -190,7 +190,7 @@ public class Home extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(routeMenuBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -265,9 +265,11 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel7MouseClicked
 
-    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+    private void routeMenuBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_routeMenuBtnMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel8MouseClicked
+        pn1Cards.remove(0);
+        pn1Cards.add(new RoutePage(),0);
+    }//GEN-LAST:event_routeMenuBtnMouseClicked
 
     /**
      * @param args the command line arguments
@@ -311,10 +313,10 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel pn1Cards;
+    private javax.swing.JLabel routeMenuBtn;
     private javax.swing.JLabel userMenuBtn;
     private javax.swing.JLabel vehicleLbl;
     // End of variables declaration//GEN-END:variables

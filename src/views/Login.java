@@ -169,18 +169,17 @@ public class Login extends javax.swing.JFrame {
         String email = emailInput.getText();
         
         String password = passwordInput.getText();
-        UserRepository userRepository = new UserRepository();
+       
         try {
-            User user = userRepository.findByEmail(email);
+            User user = UserRepository.findByEmail(email);
             if(user == null) {
-                errorLabel.setText("Email/Password inválido");
+                errorLabel.setText("Email/Password inválido1");
                 return;
             }
             
             boolean isPasswordValid = JEncript.compareHash(password, user.getPassword());
             if(!isPasswordValid) {
-                 System.out.println("user: "+ user.getName());
-                 errorLabel.setText("Email/Password inválido");
+                 errorLabel.setText("Email/Password inválido2");
                 return;
             }
             dispose();

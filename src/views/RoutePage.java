@@ -5,19 +5,37 @@
  */
 package views;
 
-
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import models.Employee;
+import models.User;
+import repositories.EmployeeRepository;
+import repositories.UserRepository;
+import utils.providers.JEncript;
+import utils.tables.TableSerialize;
+import utils.tables.UserTableDataTransform;
 
 /**
  *
  * @author Rita
  */
-public class Rotas extends javax.swing.JPanel {
+public class RoutePage extends javax.swing.JPanel {
 
     /**
-     * Creates new form Rotas
+     * Creates new form User
      */
-    public Rotas() {
+    ArrayList<Employee> employeeList;
+   
+
+    public RoutePage() {
         initComponents();
+        
+        
     }
 
     /**
@@ -98,7 +116,7 @@ public class Rotas extends javax.swing.JPanel {
                         .addGap(242, 242, 242))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(originInput, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                         .addComponent(destinationInput, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(26, 26, 26))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -124,7 +142,7 @@ public class Rotas extends javax.swing.JPanel {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(distanceInput, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(submitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42))
         );
@@ -150,7 +168,7 @@ public class Rotas extends javax.swing.JPanel {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 625, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,24 +201,25 @@ public class Rotas extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
         // TODO add your handling code here:
-//        String origin = originInput.getText();
-//        String destination = destinationInput.getText();
-//        int distance = Integer.parseInt(distanceInput.getText());
-//        Route route = new Route(origin, destination, distance);
-//        try {
-//            RouteRepository.add(route);
-//            JOptionPane.showMessageDialog(null, "Cadastrar com sucesso");
-//        } catch (Exception ex) {
-//            JOptionPane.showMessageDialog(null, "Erro ao Cadastrar");
-//        }
+        //        String origin = originInput.getText();
+        //        String destination = destinationInput.getText();
+        //        int distance = Integer.parseInt(distanceInput.getText());
+        //        Route route = new Route(origin, destination, distance);
+        //        try {
+            //            RouteRepository.add(route);
+            //            JOptionPane.showMessageDialog(null, "Cadastrar com sucesso");
+            //        } catch (Exception ex) {
+            //            JOptionPane.showMessageDialog(null, "Erro ao Cadastrar");
+            //        }
     }//GEN-LAST:event_submitBtnActionPerformed
 
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField destinationInput;
