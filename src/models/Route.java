@@ -12,7 +12,7 @@ public class Route {
     protected int id;
     protected String origin;
     protected String destination;
-    protected int distance;
+    protected double distance;
 
     public Route() {
     }
@@ -26,7 +26,7 @@ public class Route {
     }
     
     
-    public Route(String origin, String destination, int distance) {
+    public Route(String origin, String destination, double distance) {
         this.origin = origin;
         this.destination = destination;
         this.distance = distance;
@@ -52,7 +52,7 @@ public class Route {
         this.destination = destination;
     }
 
-    public int getDistance() {
+    public double getDistance() {
         return distance;
     }
 

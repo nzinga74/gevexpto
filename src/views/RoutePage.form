@@ -97,12 +97,12 @@
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="employeeCd" alignment="0" min="-2" pref="300" max="-2" attributes="0"/>
+                                          <Component id="originCb" alignment="0" min="-2" pref="300" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jComboBox1" min="-2" pref="300" max="-2" attributes="0"/>
+                                          <Component id="destineCb" min="-2" pref="300" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="102" attributes="0">
@@ -115,7 +115,7 @@
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTextField1" min="-2" pref="300" max="-2" attributes="0"/>
+                                  <Component id="distanceSp" alignment="0" min="-2" pref="300" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
@@ -133,14 +133,14 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="employeeCd" min="-2" pref="37" max="-2" attributes="0"/>
-                          <Component id="jComboBox1" min="-2" pref="37" max="-2" attributes="0"/>
+                          <Component id="originCb" min="-2" pref="37" max="-2" attributes="0"/>
+                          <Component id="destineCb" min="-2" pref="37" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jTextField1" min="-2" pref="37" max="-2" attributes="0"/>
-                      <EmptySpace pref="56" max="32767" attributes="0"/>
+                      <Component id="distanceSp" min="-2" pref="38" max="-2" attributes="0"/>
+                      <EmptySpace pref="55" max="32767" attributes="0"/>
                       <Component id="submitBtn" min="-2" pref="42" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                   </Group>
@@ -148,7 +148,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JComboBox" name="employeeCd">
+            <Component class="javax.swing.JComboBox" name="originCb">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="f5" green="ec" red="e3" type="rgb"/>
@@ -220,7 +220,7 @@
                 <Property name="text" type="java.lang.String" value="Destino"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="jComboBox1">
+            <Component class="javax.swing.JComboBox" name="destineCb">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="f5" green="ec" red="e3" type="rgb"/>
@@ -264,15 +264,7 @@
                 <Property name="text" type="java.lang.String" value="Dist&#xe2;ncia"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField1">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="f5" green="ec" red="e3" type="rgb"/>
-                </Property>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="null"/>
-                </Property>
-              </Properties>
+            <Component class="javax.swing.JSpinner" name="distanceSp">
             </Component>
           </SubComponents>
         </Container>

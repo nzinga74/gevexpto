@@ -13,8 +13,10 @@ import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import models.Employee;
+import models.Route;
 import models.User;
 import repositories.EmployeeRepository;
+import repositories.RouteRepository;
 import repositories.UserRepository;
 import utils.providers.JEncript;
 import utils.tables.TableSerialize;
@@ -53,13 +55,13 @@ public class RoutePage extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        employeeCd = new javax.swing.JComboBox<>();
+        originCb = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         submitBtn = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        destineCb = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        distanceSp = new javax.swing.JSpinner();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         userTb = new javax.swing.JTable();
@@ -78,10 +80,10 @@ public class RoutePage extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        employeeCd.setBackground(new java.awt.Color(227, 236, 245));
-        employeeCd.setForeground(new java.awt.Color(140, 164, 188));
-        employeeCd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escolha Origem", "Bengo", "Benguela", "Bié", "Cabinda", "Cuando Cubango", "Cuanza Norte", "Cuanza Sul", "Cunene", "Huambo", "Huíla", "Luanda", "Lunda Norte", "Lunda Sul", "Malanje", "Moxico", "Namibe", "Uíge", "Zaire" }));
-        employeeCd.setPreferredSize(new java.awt.Dimension(64, 18));
+        originCb.setBackground(new java.awt.Color(227, 236, 245));
+        originCb.setForeground(new java.awt.Color(140, 164, 188));
+        originCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escolha Origem", "Bengo", "Benguela", "Bié", "Cabinda", "Cuando Cubango", "Cuanza Norte", "Cuanza Sul", "Cunene", "Huambo", "Huíla", "Luanda", "Lunda Norte", "Lunda Sul", "Malanje", "Moxico", "Namibe", "Uíge", "Zaire" }));
+        originCb.setPreferredSize(new java.awt.Dimension(64, 18));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel6.setText("Origem");
@@ -99,15 +101,12 @@ public class RoutePage extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel7.setText("Destino");
 
-        jComboBox1.setBackground(new java.awt.Color(227, 236, 245));
-        jComboBox1.setForeground(new java.awt.Color(140, 164, 188));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escolhe o destino", "Bengo", "Benguela", "Bié", "Cabinda", "Cuando Cubango", "Cuanza Norte", "Cuanza Sul", "Cunene", "Huambo", "Huíla", "Luanda", "Lunda Norte", "Lunda Sul", "Malanje", "Moxico", "Namibe", "Uíge", "Zaire" }));
+        destineCb.setBackground(new java.awt.Color(227, 236, 245));
+        destineCb.setForeground(new java.awt.Color(140, 164, 188));
+        destineCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escolhe o destino", "Bengo", "Benguela", "Bié", "Cabinda", "Cuando Cubango", "Cuanza Norte", "Cuanza Sul", "Cunene", "Huambo", "Huíla", "Luanda", "Lunda Norte", "Lunda Sul", "Malanje", "Moxico", "Namibe", "Uíge", "Zaire" }));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel8.setText("Distância");
-
-        jTextField1.setBackground(new java.awt.Color(227, 236, 245));
-        jTextField1.setBorder(null);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -121,11 +120,11 @@ public class RoutePage extends javax.swing.JPanel {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6)
-                                    .addComponent(employeeCd, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(originCb, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel7)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(destineCb, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 489, Short.MAX_VALUE)
                                 .addComponent(submitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -133,7 +132,7 @@ public class RoutePage extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(distanceSp, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -145,13 +144,13 @@ public class RoutePage extends javax.swing.JPanel {
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(employeeCd, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(originCb, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(destineCb, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addComponent(jLabel8)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addComponent(distanceSp, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addComponent(submitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
@@ -215,13 +214,23 @@ public class RoutePage extends javax.swing.JPanel {
     
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
         // TODO add your handling code here:
+        String origin = originCb.getSelectedItem().toString();
+        String destine = destineCb.getSelectedItem().toString();
+        double distance = (int )distanceSp.getValue();
+        Route route = new Route(origin, destine,distance);
+        try {
+            RouteRepository.add(route);
+            JOptionPane.showMessageDialog(null, "Cadastrar com sucesso");
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao Cadastrar");
+        }
       
     }//GEN-LAST:event_submitBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> employeeCd;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> destineCb;
+    private javax.swing.JSpinner distanceSp;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -230,7 +239,7 @@ public class RoutePage extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JComboBox<String> originCb;
     private javax.swing.JButton submitBtn;
     private javax.swing.JTable userTb;
     // End of variables declaration//GEN-END:variables
