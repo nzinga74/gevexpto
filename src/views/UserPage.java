@@ -262,7 +262,7 @@ public class UserPage extends javax.swing.JPanel {
             String password;
             try {
                 password = JEncript.encript(passwordInput.getText());
-            } catch (NoSuchAlgorithmException ex) {
+            } catch (NoSuchAlgorithmException ex){
                 return;
             }
             int employeeId = employeeCd.getSelectedIndex();

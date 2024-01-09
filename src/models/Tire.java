@@ -11,7 +11,16 @@ import javax.swing.JOptionPane;
  * @author nzinga
  */
 public class Tire {
-    public void performMaintenance () {
-        JOptionPane.showMessageDialog(null,"pneus foram tricados... ");
+
+    private String model;
+    private String brand;
+
+    public Tire() {
     }
+    
+    public Tire(String model, String brand) {
+        this.model = model;
+        this.brand = brand;
+    }
+    
 }

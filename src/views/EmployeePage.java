@@ -97,7 +97,7 @@ public class EmployeePage extends javax.swing.JPanel {
 
         officeCb.setBackground(new java.awt.Color(227, 236, 245));
         officeCb.setForeground(new java.awt.Color(140, 164, 188));
-        officeCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escolha o cargo", "Admin", "Mecânico", "Gestor" }));
+        officeCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escolha o cargo", "Admin", "Mecânico", "Gestor", "Motorista" }));
         officeCb.setBorder(null);
         officeCb.setPreferredSize(new java.awt.Dimension(64, 18));
 

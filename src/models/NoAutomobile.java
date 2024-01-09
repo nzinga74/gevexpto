@@ -4,12 +4,21 @@
  */
 package models;
 
+import java.util.Date;
+
 /**
  *
  * @author nzinga
  */
 public class NoAutomobile extends Vehicle {
-    public void performMaintenance ( Mechanic mechanic,int options ) {
-    
+
+    public NoAutomobile(int id, String type, String brand, String model, String carRegistration, int year, int capacity, Tire tire) {
+        super(id, type, brand, model, carRegistration, year, capacity, tire);
     }
+
+    public NoAutomobile(int id, String type, String brand, String model, String carRegistration, int year, int capacity, Tire tire, Driver driver) {
+        super(id, type, brand, model, carRegistration, year, capacity, tire,  driver);
+    }
+
+   
 }

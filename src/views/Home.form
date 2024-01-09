@@ -63,7 +63,7 @@
               <Component id="jLabel1" max="32767" attributes="0"/>
               <Component id="vehicleLbl" alignment="0" max="32767" attributes="0"/>
               <Component id="userMenuBtn" alignment="0" max="32767" attributes="0"/>
-              <Component id="jLabel5" alignment="0" max="32767" attributes="0"/>
+              <Component id="maintenanceMenu" alignment="0" max="32767" attributes="0"/>
               <Component id="jLabel7" alignment="0" max="32767" attributes="0"/>
               <Component id="jLabel4" alignment="0" max="32767" attributes="0"/>
               <Component id="routeMenuBtn" alignment="0" max="32767" attributes="0"/>
@@ -99,7 +99,7 @@
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Component id="vehicleLbl" min="-2" pref="47" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                  <Component id="jLabel5" min="-2" pref="47" max="-2" attributes="0"/>
+                  <Component id="maintenanceMenu" min="-2" pref="47" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="routeMenuBtn" min="-2" pref="47" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
@@ -186,7 +186,7 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel4MouseClicked"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel5">
+        <Component class="javax.swing.JLabel" name="maintenanceMenu">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="e2" red="dd" type="rgb"/>
@@ -198,7 +198,7 @@
             <Property name="text" type="java.lang.String" value="Manuten&#xe7;&#xe3;o"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel5MouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="maintenanceMenuMouseClicked"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">

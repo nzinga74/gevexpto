@@ -26,7 +26,7 @@ public class Vehicle {
     public Vehicle() {
     }
 
-    public Vehicle(int id, String type, String brand, String model, String carRegistration, int year, int capacity, Date createdAt, Date updatedAt, Tire tire) {
+    public Vehicle(int id, String type, String brand, String model, String carRegistration, int year, int capacity, Tire tire) {
         this.id = id;
         this.type = type;
         this.brand = brand;
@@ -34,14 +34,13 @@ public class Vehicle {
         this.carRegistration = carRegistration;
         this.year = year;
         this.capacity = capacity;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+      
         this.tire = tire;
     }
     
     
     
-    public Vehicle(int id, String type, String brand, String model, String carRegistration, int year, int capacity, Date createdAt, Date updatedAt, Driver driver, Tire tire) {
+    public Vehicle(int id, String type, String brand, String model, String carRegistration, int year, int capacity, Tire tire,  Driver driver) {
         this.id = id;
         this.type = type;
         this.brand = brand;
@@ -49,11 +48,10 @@ public class Vehicle {
         this.carRegistration = carRegistration;
         this.year = year;
         this.capacity = capacity;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
         this.driver = driver;
         this.tire = tire;
     }
+    
     
     //CREATE THE METHODS
 
@@ -145,6 +143,7 @@ public class Vehicle {
     public void setDriver(Driver driver) {
         this.driver = driver;
     }
+    
 
     @Override
     public String toString() {

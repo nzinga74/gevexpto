@@ -4,10 +4,16 @@
  */
 package models;
 
+import java.util.Date;
+
 /**
  *
  * @author nzinga
  */
 public class Bike extends NoAutomobile{
+    
+    public Bike(int id, String type, String brand, String model, String carRegistration, int year, int capacity, Date createdAt, Date updatedAt, Driver driver, Tire tire) {
+        super(id, type, brand, model, carRegistration, year, capacity, tire,  driver);
+    }
     
 }

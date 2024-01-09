@@ -5,6 +5,7 @@
 package models;
 
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,23 +14,21 @@ import java.util.Date;
 public class AutoMobile extends Vehicle {
     protected Motor motor;
 
-    public AutoMobile(Motor motor, int id, String type, String brand, String model, String carRegistration, int year, int capacity, Date createdAt, Date updatedAt, Tire tire) {
-        super(id, type, brand, model, carRegistration, year, capacity, createdAt, updatedAt, tire);
-        this.motor = motor;
+    public AutoMobile(int id, String type, String brand, String model, String carRegistration, int year, int capacity, Tire tire) {
+        super(id, type, brand, model, carRegistration, year, capacity, tire);
     }
 
-    public AutoMobile(Motor motor, int id, String type, String brand, String model, String carRegistration, int year, int capacity, Date createdAt, Date updatedAt, Driver driver, Tire tire) {
-        super(id, type, brand, model, carRegistration, year, capacity, createdAt, updatedAt, driver, tire);
-        this.motor = motor;
+    public AutoMobile(int id, String type, String brand, String model, String carRegistration, int year, int capacity,  Driver driver, Tire tire) {
+        super(id, type, brand, model, carRegistration, year, capacity, tire, driver);
     }
     
-    public void performMaintenance (Vehicle vehicle, Mechanic mechanic,int options ) {
+   
     
-    }
     public boolean operateEngine() {
         return this.motor.turnOnMotor();
     }
-
+    
+    
     
     
     public Motor getMotor() {

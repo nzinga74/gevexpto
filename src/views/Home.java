@@ -18,6 +18,7 @@ public class Home extends javax.swing.JFrame {
      */
      EmployeePage employeePage = new EmployeePage();
      Vehicle vehicle = new Vehicle();
+     UserPage userPage = new UserPage();
     CardLayout cardLayout;
 //    D test = new D();
 //    Employee s = new Employee();
@@ -43,7 +44,7 @@ public class Home extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         userMenuBtn = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        maintenanceMenu = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         routeMenuBtn = new javax.swing.JLabel();
@@ -106,13 +107,13 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setForeground(new java.awt.Color(221, 226, 255));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icon2.png"))); // NOI18N
-        jLabel5.setText("Manutenção");
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+        maintenanceMenu.setForeground(new java.awt.Color(221, 226, 255));
+        maintenanceMenu.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        maintenanceMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icon2.png"))); // NOI18N
+        maintenanceMenu.setText("Manutenção");
+        maintenanceMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel5MouseClicked(evt);
+                maintenanceMenuMouseClicked(evt);
             }
         });
 
@@ -157,7 +158,7 @@ public class Home extends javax.swing.JFrame {
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(vehicleLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(userMenuBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(maintenanceMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(routeMenuBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -188,7 +189,7 @@ public class Home extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addComponent(vehicleLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(maintenanceMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(routeMenuBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
@@ -246,16 +247,17 @@ public class Home extends javax.swing.JFrame {
     private void userMenuBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userMenuBtnMouseClicked
         // TODO add your handling code here:
         pn1Cards.remove(0);
-        pn1Cards.add(new UserPage(),0);
+        pn1Cards.add(userPage,0);
     }//GEN-LAST:event_userMenuBtnMouseClicked
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel4MouseClicked
 
-    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel5MouseClicked
+    private void maintenanceMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maintenanceMenuMouseClicked
+        pn1Cards.remove(0);
+        pn1Cards.add(new Maintenance(),0);
+    }//GEN-LAST:event_maintenanceMenuMouseClicked
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
         // TODO add your handling code here:
@@ -310,11 +312,11 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel maintenanceMenu;
     private javax.swing.JPanel pn1Cards;
     private javax.swing.JLabel routeMenuBtn;
     private javax.swing.JLabel userMenuBtn;

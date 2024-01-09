@@ -96,12 +96,12 @@
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jComboBox4" min="-2" pref="229" max="-2" attributes="0"/>
+                                  <Component id="motorCb" min="-2" pref="229" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jComboBox5" min="-2" pref="233" max="-2" attributes="0"/>
+                                  <Component id="driverCb" min="-2" pref="233" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="201" max="-2" attributes="0"/>
                           </Group>
@@ -194,8 +194,8 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jComboBox4" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                          <Component id="jComboBox5" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                          <Component id="motorCb" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                          <Component id="driverCb" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
@@ -385,7 +385,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="jComboBox4">
+            <Component class="javax.swing.JComboBox" name="motorCb">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="f5" green="ec" red="e3" type="rgb"/>
@@ -414,7 +414,7 @@
                 <Property name="text" type="java.lang.String" value="Motor"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="jComboBox5">
+            <Component class="javax.swing.JComboBox" name="driverCb">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="f5" green="ec" red="e3" type="rgb"/>
@@ -511,7 +511,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="jTable1">
+                <Component class="javax.swing.JTable" name="vehicleTb">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="14" style="0"/>

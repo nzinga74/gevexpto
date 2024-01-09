@@ -9,10 +9,23 @@ package models;
  * @author nzinga
  */
 public class Route {
+    protected int id;
     protected String origin;
     protected String destination;
     protected int distance;
 
+    public Route() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    
     public Route(String origin, String destination, int distance) {
         this.origin = origin;
         this.destination = destination;
@@ -23,6 +36,10 @@ public class Route {
         return origin;
     }
 
+    public Route(int id) {
+        this.id = id;
+    }
+    
     public void setOrigin(String origin) {
         this.origin = origin;
     }
