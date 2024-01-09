@@ -45,7 +45,7 @@ public class RouteRepository {
                 String origin = routeResultSet.getString("origem");
                 String destine = routeResultSet.getString("destino");
                 double distance =  routeResultSet.getDouble("distancia");
-                Route route = new Route(origin,destine,distance);
+                Route route = new Route(id,origin,destine,distance);
                 routeList.add(route);
             }
             ps.close();
@@ -56,5 +56,7 @@ public class RouteRepository {
             throw new Exception("Erro ao buscar os usuários");
         }
     }
+
+    
     
 }

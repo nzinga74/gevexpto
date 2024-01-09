@@ -20,7 +20,7 @@ import repositories.RouteRepository;
 import repositories.UserRepository;
 import utils.providers.JEncript;
 import utils.tables.TableSerialize;
-import utils.tables.UserTableDataTransform;
+import utils.tables.RouteTableDataTransform;
 
 /**
  *
@@ -32,11 +32,11 @@ public class RoutePage extends javax.swing.JPanel {
      * Creates new form User
      */
     ArrayList<Employee> employeeList;
-    ArrayList<User> usersList;
+
 
     public RoutePage() {
         initComponents();
-        
+        loadRoutes();
         
         //GET ALL USERS
         
@@ -64,7 +64,7 @@ public class RoutePage extends javax.swing.JPanel {
         distanceSp = new javax.swing.JSpinner();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        userTb = new javax.swing.JTable();
+        routeTb = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(780, 440));
@@ -159,8 +159,8 @@ public class RoutePage extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        userTb.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        userTb.setModel(new javax.swing.table.DefaultTableModel(
+        routeTb.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        routeTb.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -171,7 +171,7 @@ public class RoutePage extends javax.swing.JPanel {
                 "Origem", "Destino", "Distância"
             }
         ));
-        jScrollPane1.setViewportView(userTb);
+        jScrollPane1.setViewportView(routeTb);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -220,13 +220,24 @@ public class RoutePage extends javax.swing.JPanel {
         Route route = new Route(origin, destine,distance);
         try {
             RouteRepository.add(route);
+            loadRoutes();
             JOptionPane.showMessageDialog(null, "Cadastrar com sucesso");
         }catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao Cadastrar");
         }
       
     }//GEN-LAST:event_submitBtnActionPerformed
+    public void loadRoutes() {
+        try {
+            ArrayList<Route> routesList = RouteRepository.getAll();
+            String [][] data = RouteTableDataTransform.dataTransform(routesList);
+            String [] columnNames = RouteTableDataTransform.dataColumn();
+            TableSerialize userTableModel = new TableSerialize(data, columnNames) ;
+            routeTb.setModel(userTableModel);
+        } catch (Exception e) {
 
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> destineCb;
@@ -240,7 +251,7 @@ public class RoutePage extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JComboBox<String> originCb;
+    private javax.swing.JTable routeTb;
     private javax.swing.JButton submitBtn;
-    private javax.swing.JTable userTb;
     // End of variables declaration//GEN-END:variables
 }

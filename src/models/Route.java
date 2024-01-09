@@ -24,6 +24,13 @@ public class Route {
     public void setId(int id) {
         this.id = id;
     }
+
+    public Route(int id, String origin, String destination, double distance) {
+        this.id = id;
+        this.origin = origin;
+        this.destination = destination;
+        this.distance = distance;
+    }
     
     
     public Route(String origin, String destination, double distance) {
