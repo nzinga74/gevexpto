@@ -22,6 +22,7 @@ public class Vehicle {
     protected Date updatedAt;
     protected Driver driver;
     protected Tire tire;
+    protected Route route;
 
     public Vehicle() {
     }
@@ -51,6 +52,18 @@ public class Vehicle {
         this.driver = driver;
         this.tire = tire;
     }
+    public Vehicle(int id, String type, String brand, String model, String carRegistration, int year, int capacity, Tire tire,  Driver driver, Route route) {
+        this.id = id;
+        this.type = type;
+        this.brand = brand;
+        this.model = model;
+        this.carRegistration = carRegistration;
+        this.year = year;
+        this.capacity = capacity;
+        this.driver = driver;
+        this.tire = tire;
+        this.route = route;
+    }
     
     
     //CREATE THE METHODS
@@ -61,6 +74,14 @@ public class Vehicle {
 
     public void setTire(Tire tire) {
         this.tire = tire;
+    }
+
+    public Route getRoute() {
+        return route;
+    }
+
+    public void setRoute(Route route) {
+        this.route = route;
     }
     
     

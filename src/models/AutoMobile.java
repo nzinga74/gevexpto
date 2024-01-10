@@ -18,8 +18,110 @@ public class AutoMobile extends Vehicle {
         super(id, type, brand, model, carRegistration, year, capacity, tire);
     }
 
-    public AutoMobile(int id, String type, String brand, String model, String carRegistration, int year, int capacity,  Driver driver, Tire tire) {
+    public AutoMobile(int id, String type, String brand, String model, String carRegistration, int year, int capacity,  Driver driver, Tire tire, Motor motor) {
         super(id, type, brand, model, carRegistration, year, capacity, tire, driver);
+        this.motor = motor;
+    }
+
+    public AutoMobile(Motor motor, int id, String type, String brand, String model, String carRegistration, int year, int capacity,  Driver driver,Tire tire, Route route) {
+        super(id, type, brand, model, carRegistration, year, capacity, tire, driver, route);
+        this.motor = motor;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getCarRegistration() {
+        return carRegistration;
+    }
+
+    public void setCarRegistration(String carRegistration) {
+        this.carRegistration = carRegistration;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public Driver getDriver() {
+        return driver;
+    }
+
+    public void setDriver(Driver driver) {
+        this.driver = driver;
+    }
+
+    public Tire getTire() {
+        return tire;
+    }
+
+    public void setTire(Tire tire) {
+        this.tire = tire;
+    }
+
+    public Route getRoute() {
+        return route;
+    }
+
+    public void setRoute(Route route) {
+        this.route = route;
     }
     
    

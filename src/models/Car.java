@@ -16,9 +16,9 @@ public class Car extends AutoMobile {
         super(id, type, brand, model, carRegistration, year, capacity, tire);
     }
 
-    public Car(int id, String type, String brand, String model, String carRegistration, int year, int capacity, Driver driver, Tire tire) {
-        super(id, type, brand, model, carRegistration, year, capacity, driver, tire);
-    }
+//    public Car(int id, String type, String brand, String model, String carRegistration, int year, int capacity, Driver driver, Tire tire) {
+//        super(id, type, brand, model, carRegistration, year, capacity, driver, tire);
+//    }
 
    
 

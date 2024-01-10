@@ -7,15 +7,21 @@ package views;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import models.Driver;
 import models.Employee;
 import models.Mechanic;
 import models.Motor;
+import models.Route;
+import models.Tire;
 import repositories.EmployeeRepository;
 import repositories.MotorRepository;
 import repositories.VehicleRepository;
+import repositories.RouteRepository;
+import repositories.UserRepository;
 import utils.tables.TableSerialize;
 import utils.tables.VehicleTableDataTransform;
+import utils.tables.data.Seed;
 
 /**
  *
@@ -23,46 +29,59 @@ import utils.tables.VehicleTableDataTransform;
  */
 public class Vehicle extends javax.swing.JPanel {
 
+    private ArrayList<Route> routesList;
+    ArrayList<Motor> motorList;
+    ArrayList<Employee> employeeList;
+    ArrayList<Driver> driverList;
+
     /**
      * Creates new form Vehicle
      */
     public Vehicle() {
         initComponents();
         try {
-            ArrayList<Motor> motorList = MotorRepository.getAll();
-            ArrayList<Employee> employeeList = EmployeeRepository.getAll();
-            ArrayList<Driver> driverList = new ArrayList<Driver>();
-              for(int i = 0; i < employeeList.size(); i++) {
-                 Employee employee = employeeList.get(i);
-                 if(employee.getOffice().compareTo("Motorista") == 0){
-                     String bi = employee.getBi();
-                     String firstName = employee.getFirstName();
-                     String lastName = employee.getLastName();
-                     String nacionality = employee.getNacionality();
-                     String office = employee.getOffice();
-                     Date birthDate = employee.getBirthDate();
-                     
-                     char  sex = employee.getSex();
-                     Driver driver = new Driver(bi,firstName,lastName,nacionality,sex,birthDate,office);
-                     driverList.add(driver);
-                 }
-             }
-            
-            
+            motorList = MotorRepository.getAll();
+            employeeList = EmployeeRepository.getAll();
+            routesList = RouteRepository.getAll();
+            driverList = new ArrayList<Driver>();
+            for (int i = 0; i < employeeList.size(); i++) {
+                Employee employee = employeeList.get(i);
+                if (employee.getOffice().compareTo("Motorista") == 0) {
+                    String bi = employee.getBi();
+                    String firstName = employee.getFirstName();
+                    String lastName = employee.getLastName();
+                    String nacionality = employee.getNacionality();
+                    String office = employee.getOffice();
+                    Date birthDate = employee.getBirthDate();
+                    int id = employee.getId();
+
+                    char sex = employee.getSex();
+                    Driver driver = new Driver(bi, firstName, lastName, nacionality, sex, birthDate, office);
+                    driver.setId(id);
+                    driverList.add(driver);
+                }
+            }
+
             int motorlength = motorList.size();
             int driverlength = driverList.size();
+            int routelength = routesList.size();
             String motorData[] = new String[motorlength];
             String driverData[] = new String[driverlength];
-            
+            String routeData[] = new String[routelength];
+
             for (int i = 0; i < driverlength; i++) {
                 driverData[i] = driverList.get(i).getFirstName() + " " + driverList.get(i).getLastName();
-             }
+            }
             for (int i = 0; i < motorlength; i++) {
                 motorData[i] = motorList.get(i).getBrand() + "-" + motorList.get(i).getModel() + "-" + motorList.get(i).getCilinder();
+            }
+            for (int i = 0; i < routelength; i++) {
+                routeData[i] = routesList.get(i).getOrigin() + "-" + routesList.get(i).getDestination();
             }
             motorCb.setModel(new DefaultComboBoxModel(motorData));
             loadVehicleData();
             driverCb.setModel(new DefaultComboBoxModel(driverData));
+            routeCb.setModel(new DefaultComboBoxModel(routeData));
         } catch (Exception e) {
             System.out.println("Erro ao carregar");
         }
@@ -96,22 +115,22 @@ public class Vehicle extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField3 = new javax.swing.JTextField();
+        typeVehicleCb = new javax.swing.JComboBox<>();
+        carRegistrationTxt = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        routeCb = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jTextField4 = new javax.swing.JTextField();
+        submitBtn = new javax.swing.JButton();
+        brandCb = new javax.swing.JComboBox<>();
+        modelTxt = new javax.swing.JTextField();
         motorCb = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         driverCb = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jComboBox6 = new javax.swing.JComboBox<>();
+        capacityCb = new javax.swing.JComboBox<>();
+        yearSp = new javax.swing.JSpinner();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         vehicleTb = new javax.swing.JTable();
@@ -148,25 +167,35 @@ public class Vehicle extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel4.setText("Ano");
 
-        jComboBox1.setBackground(new java.awt.Color(227, 236, 245));
-        jComboBox1.setForeground(new java.awt.Color(140, 164, 188));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tipo de veículo", "Automóvel", "Não automóvel" }));
-        jComboBox1.setPreferredSize(new java.awt.Dimension(64, 18));
+        typeVehicleCb.setBackground(new java.awt.Color(227, 236, 245));
+        typeVehicleCb.setForeground(new java.awt.Color(140, 164, 188));
+        typeVehicleCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tipo de veículo", "Automóvel", "Não automóvel" }));
+        typeVehicleCb.setPreferredSize(new java.awt.Dimension(64, 18));
+        typeVehicleCb.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                typeVehicleCbItemStateChanged(evt);
+            }
+        });
+        typeVehicleCb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                typeVehicleCbActionPerformed(evt);
+            }
+        });
 
-        jTextField3.setBackground(new java.awt.Color(227, 236, 245));
-        jTextField3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField3.setForeground(new java.awt.Color(140, 164, 188));
-        jTextField3.setText(" Digite o identificador");
-        jTextField3.setBorder(null);
+        carRegistrationTxt.setBackground(new java.awt.Color(227, 236, 245));
+        carRegistrationTxt.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        carRegistrationTxt.setForeground(new java.awt.Color(140, 164, 188));
+        carRegistrationTxt.setText(" Digite o identificador");
+        carRegistrationTxt.setBorder(null);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel5.setText("Rotas");
 
-        jComboBox2.setBackground(new java.awt.Color(227, 236, 245));
-        jComboBox2.setForeground(new java.awt.Color(140, 164, 188));
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escolha a rota" }));
-        jComboBox2.setToolTipText("");
-        jComboBox2.setPreferredSize(new java.awt.Dimension(64, 18));
+        routeCb.setBackground(new java.awt.Color(227, 236, 245));
+        routeCb.setForeground(new java.awt.Color(140, 164, 188));
+        routeCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escolha a rota" }));
+        routeCb.setToolTipText("");
+        routeCb.setPreferredSize(new java.awt.Dimension(64, 18));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel6.setText("Modelo");
@@ -174,23 +203,26 @@ public class Vehicle extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel7.setText("Matricula");
 
-        jButton1.setBackground(new java.awt.Color(55, 66, 88));
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Cadastrar");
+        submitBtn.setBackground(new java.awt.Color(55, 66, 88));
+        submitBtn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        submitBtn.setForeground(new java.awt.Color(255, 255, 255));
+        submitBtn.setText("Cadastrar");
+        submitBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitBtnActionPerformed(evt);
+            }
+        });
 
-        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("##/##/####"))));
+        brandCb.setBackground(new java.awt.Color(227, 236, 245));
+        brandCb.setForeground(new java.awt.Color(140, 164, 188));
+        brandCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escolha Marca", "Toyota", "Ford", "Chevrolet", "Honda", "Volkswagen", "Nissan", "BMW", "Mercedes-Benz", "Audi", "Hyundai", "Kia", "Subaru", "Mazda", "Tesla", "Jaguar", "Land Rover", "Porsche", "Fiat", "Volvo", "Mitsubishi", "Lexus", "Acura", "Buick", "Cadillac", "Jeep", "Chrysler", "Dodge", "Ram", "GMC", "Infiniti" }));
+        brandCb.setPreferredSize(new java.awt.Dimension(64, 18));
 
-        jComboBox3.setBackground(new java.awt.Color(227, 236, 245));
-        jComboBox3.setForeground(new java.awt.Color(140, 164, 188));
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escolha Marca" }));
-        jComboBox3.setPreferredSize(new java.awt.Dimension(64, 18));
-
-        jTextField4.setBackground(new java.awt.Color(227, 236, 245));
-        jTextField4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField4.setForeground(new java.awt.Color(140, 164, 188));
-        jTextField4.setText(" Digite o modelo");
-        jTextField4.setBorder(null);
+        modelTxt.setBackground(new java.awt.Color(227, 236, 245));
+        modelTxt.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        modelTxt.setForeground(new java.awt.Color(140, 164, 188));
+        modelTxt.setText(" Digite o modelo");
+        modelTxt.setBorder(null);
 
         motorCb.setBackground(new java.awt.Color(227, 236, 245));
         motorCb.setForeground(new java.awt.Color(140, 164, 188));
@@ -211,10 +243,10 @@ public class Vehicle extends javax.swing.JPanel {
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel10.setText("Lotação");
 
-        jComboBox6.setBackground(new java.awt.Color(227, 236, 245));
-        jComboBox6.setForeground(new java.awt.Color(140, 164, 188));
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1" }));
-        jComboBox6.setPreferredSize(new java.awt.Dimension(64, 18));
+        capacityCb.setBackground(new java.awt.Color(227, 236, 245));
+        capacityCb.setForeground(new java.awt.Color(140, 164, 188));
+        capacityCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1" }));
+        capacityCb.setPreferredSize(new java.awt.Dimension(64, 18));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -230,7 +262,7 @@ public class Vehicle extends javax.swing.JPanel {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
                             .addComponent(motorCb, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
                             .addComponent(driverCb, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -239,53 +271,53 @@ public class Vehicle extends javax.swing.JPanel {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
                             .addComponent(jLabel2)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(typeVehicleCb, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(modelTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(31, 31, 31)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel7)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(carRegistrationTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel5)
                                         .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(routeCb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(brandCb, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3))
-                                .addGap(50, 50, 50)
+                                .addGap(30, 30, 30)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(yearSp, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel4))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(capacityCb, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(submitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(yearSp))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(brandCb, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(typeVehicleCb, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -293,9 +325,9 @@ public class Vehicle extends javax.swing.JPanel {
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(modelTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(carRegistrationTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(routeCb, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -309,11 +341,11 @@ public class Vehicle extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(capacityCb, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addComponent(submitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20))))
         );
 
@@ -470,18 +502,53 @@ public class Vehicle extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void typeVehicleCbItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_typeVehicleCbItemStateChanged
+        if (typeVehicleCb.getSelectedIndex() == 1) {
+            motorCb.setVisible(true);
+            brandCb.setModel(new DefaultComboBoxModel(Seed.AutomobileBrands()));
+        } else if (typeVehicleCb.getSelectedIndex() == 2) {
+            motorCb.setVisible(false);
+            brandCb.setModel(new DefaultComboBoxModel(Seed.noAutomobileBrands()));
+        }
+    }//GEN-LAST:event_typeVehicleCbItemStateChanged
+
+    private void typeVehicleCbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_typeVehicleCbActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_typeVehicleCbActionPerformed
+
+    private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
+        String model = modelTxt.getText();
+        String brand = brandCb.getSelectedItem().toString();
+        String type = typeVehicleCb.getSelectedItem().toString();
+        int capacity = Integer.parseInt(capacityCb.getSelectedItem().toString());
+        int routePosition = routeCb.getSelectedIndex();
+        int driverPosition = driverCb.getSelectedIndex();
+        int motorPosition = motorCb.getSelectedIndex();
+        Route route = routesList.get(routePosition);
+        String carRegistration = carRegistrationTxt.getText();
+        Driver driver = driverList.get(driverPosition);
+        Motor motor = motorList.get(motorPosition);
+        int year = (int)yearSp.getValue();
+        Tire tire = new Tire();
+        models.AutoMobile vehicle = new models.AutoMobile(motor,1, type, brand, model, carRegistration, year, capacity, driver, tire,route);
+        try {
+            VehicleRepository.add(vehicle);
+            JOptionPane.showMessageDialog(null, "Cadastrar com sucesso");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Cadastrar");
+        }
+        loadVehicleData();
+    }//GEN-LAST:event_submitBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> brandCb;
+    private javax.swing.JComboBox<String> capacityCb;
+    private javax.swing.JTextField carRegistrationTxt;
     private javax.swing.JComboBox<String> driverCb;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox6;
     private javax.swing.JComboBox<String> jComboBox7;
     private javax.swing.JComboBox<String> jComboBox8;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFormattedTextField jFormattedTextField2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -503,9 +570,12 @@ public class Vehicle extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField modelTxt;
     private javax.swing.JComboBox<String> motorCb;
+    private javax.swing.JComboBox<String> routeCb;
+    private javax.swing.JButton submitBtn;
+    private javax.swing.JComboBox<String> typeVehicleCb;
     private javax.swing.JTable vehicleTb;
+    private javax.swing.JSpinner yearSp;
     // End of variables declaration//GEN-END:variables
 }

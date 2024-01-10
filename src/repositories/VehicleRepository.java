@@ -15,11 +15,42 @@ import models.Route;
 import models.Tire;
 import models.User;
 import models.Vehicle;
+import models.AutoMobile;
 /**
  *
  * @author nzinga
  */
 public class VehicleRepository {
+    public static void add(AutoMobile vehicle) throws Exception {
+        String sql = "INSERT INTO veiculo(tipo, marca, modelo,matricula,ano, lotacao, id_rota, id_funcionario,id_motor) VALUES (?,?,?,?,?,?,?,?,?)";
+        PreparedStatement ps = null;
+        try {
+            ps = MysqlConnection.getConnection().prepareStatement(sql);
+            ps.setString(1, vehicle.getType());
+            ps.setString(2, vehicle.getBrand());
+            ps.setString(3, vehicle.getModel());
+            ps.setString(4, vehicle.getCarRegistration());
+            ps.setInt(5, vehicle.getYear());
+            ps.setInt(6, vehicle.getCapacity());
+            if(vehicle.getMotor()== null){
+                 ps.setNull(9, 0);
+            }else {
+                ps.setInt(9, vehicle.getMotor().getId());
+            }
+            ps.setInt(7, vehicle.getRoute().getId());
+            ps.setInt(8, vehicle.getDriver().getId());
+           
+            
+
+            ps.execute();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("Erro aqui");
+            
+            throw new Exception();
+        }
+    }
+
     public static ArrayList<Vehicle> getAll() throws Exception{
        String sql = "select * from veiculo";
        ArrayList<Vehicle> vehicleList = new ArrayList<Vehicle>();
